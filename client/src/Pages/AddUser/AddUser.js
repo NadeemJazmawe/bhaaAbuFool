@@ -39,6 +39,7 @@ export default function AddUser() {
     <div style={{marginTop: "100px"}}>
     <form
     style={{
+      direction: 'rtl',
       margin: "auto",
       padding: "15px",
       maxWidth: "400px",

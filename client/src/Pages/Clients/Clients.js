@@ -7,7 +7,8 @@ import { Link } from 'react-router-dom';
 
 export default function Clients() {
 
-    const [data, setData] = useState([]);
+  const [data, setData] = useState([]);
+  const [search, setSearch] = useState([]);
 
   useEffect(() => {
     getUsers();
@@ -23,6 +24,21 @@ export default function Clients() {
 
   return (
     <div style={{marginTop: "150px"}}>
+
+    <div className='search-bar'>
+      <label htmlFor='search'>חפוש</label>
+      <input
+      type="text"
+      id="search"
+      name='search'
+      placeholder='חיפוש'
+      onChange={(e) => {
+        setSearch(e.target.value)
+      }}
+      value={search}
+      />
+    </div>
+
     <table className='styled-table'>
       <thead>
         <tr>
