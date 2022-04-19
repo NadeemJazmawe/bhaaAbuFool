@@ -1,46 +1,37 @@
-import React, { useState } from 'react'
+import React from 'react'
 
-export default function LogIn() {
+export default function SignUp() {
 
-  const [id, setId] = useState("");
-  const [pass, setPass] = useState("");
-
-  const handleLogIn = async (e) => {
-    e.preventDefault()
-    fetch('/user/users', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        id: id,
-        pass: pass
-      })
-    }).then(r => r.json())
-        .then(data => {
-          if(data.ok){
-            console.log({"LogIn": true});
-          }else{
-            console.log({"LogIn": false});
-          }
+    const [id, setId] = useState("");
+    const [pass, setPass] = useState("");
+  
+    const handleSignUp = async (e) => {
+      fetch('/user/add', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          id: id,
+          pass: pass
         })
-  }
-
+      }).then(r => r.json())
+          .then(data => {
+            if(data.ok){
+              console.log({"User added": true});
+            }else{
+              console.log({"User added": false});
+            }
+          })
+    }
+  
   return (
-    <div className='login'> 
+    <div className='signup'> 
         {/* <div className='header'>
             <p className='logo'>Bhaa Abu fool</p>
         </div> */}
 
-        <form 
-             style={{
-              direction: 'rtl',
-              margin: "auto",
-              padding: "15px",
-              maxWidth: "400px",
-              alignContent: "center",
-            }}
-          onSubmit={handleLogIn}>
+        <form onSubmit={handleSignUp}>
           <label htmlFor="id-input">שם משתמש</label>
           <input
             type="text"
@@ -73,3 +64,5 @@ export default function LogIn() {
     </div>
   )
 }
+
+

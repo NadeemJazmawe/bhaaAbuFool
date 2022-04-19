@@ -13,14 +13,14 @@ export default function Listem() {
 
   const getUsers = async () => {
     const name = "nadeem";
-    const response = await axios.get("/user/listem",{params : {name}});
+    const response = await axios.get("/listem",{params : {name}});
       if(response.status === 200){
         setData(response.data);
       }
   }
 
   const handleAddListem = (e) => {
-    fetch('/user/listem', {
+    fetch('/listem', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -40,7 +40,7 @@ export default function Listem() {
   }
 
   const deleteListem = async (_id) => {
-    await axios.delete(`/user/listem/${_id}`);
+    await axios.delete(`/listem/${_id}`);
     getUsers();
   }
 
@@ -49,6 +49,13 @@ export default function Listem() {
     <div className='listem'>
 
       <form className='add-listem'
+         style={{
+          direction: 'rtl',
+          margin: "auto",
+          padding: "15px",
+          maxWidth: "400px",
+          alignContent: "center",
+        }}
         onSubmit={handleAddListem}
       >
         <label htmlFor='listem-input'>הוסף מסימה</label>
@@ -63,10 +70,10 @@ export default function Listem() {
           value={listem}
           required={true}
           />
-          <input type="submit" value="הוסף לקוח" />
+          <input type="submit" value="הוסף מסימה" />
       </form>
 
-      <table className='listem-table' >
+      <table className='styled-table' >
         <thead>
           <tr>
             <th>מס</th>

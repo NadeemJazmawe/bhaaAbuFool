@@ -1,30 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const userController = require("../controller/userController");
+const UserController = require("../controller/userController");
 
 router
     .route("/users")
-    .get(userController.Users);
-
-
-router
-    .route("/adduser")
-    .post(userController.AddUser);
-
+    .post(UserController.CheckUser);
 
 router
-    .route("/listem")
-    .get(userController.Listem);
-
-
-router
-    .route("/listem")
-    .post(userController.AddListem);
-
-router
-    .route("/listem/:id")
-    .delete(userController.DeleteListem);
-
+    .route("/add")
+    .post(UserController.addUser);
 
 module.exports = router;
-

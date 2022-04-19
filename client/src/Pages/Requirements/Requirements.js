@@ -50,6 +50,13 @@ export default function Requirements() {
     <div className='requirement'>
 
       <form className='add-requirment'
+           style={{
+            direction: 'rtl',
+            margin: "auto",
+            padding: "15px",
+            maxWidth: "400px",
+            alignContent: "center",
+          }}
         onSubmit={handleAddRequirment}
       >
         <label htmlFor='to-input'>שלח ל</label>
@@ -57,7 +64,7 @@ export default function Requirements() {
           type="text"
           id="to-input"
           name='to-input'
-          placeholder='הוסף מסימה'
+          placeholder='שלח ל'
           onChange={(e) => {
             setTo(e.target.value)
           }}
@@ -70,7 +77,7 @@ export default function Requirements() {
           type="text"
           id="text-input"
           name='text-input'
-          placeholder='הוסף מסימה'
+          placeholder='נוסח '
           onChange={(e) => {
             setText(e.target.value)
           }}
@@ -80,12 +87,13 @@ export default function Requirements() {
           <input type="submit" value="שלח דרישה" />
       </form>
 
-      <table className='listem-table' >
+      <table className='styled-table' >
         <thead>
           <tr>
             <th>מס</th>
             <th>התקבלה מ</th>
             <th>נוסח</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>

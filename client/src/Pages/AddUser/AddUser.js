@@ -13,7 +13,7 @@ export default function AddUser() {
   function handleRegister (e){
     e.preventDefault();
     console.log({name:name, phone: phone, mail:email});
-    fetch('/user/adduser',{
+    fetch('/client/addclient',{
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

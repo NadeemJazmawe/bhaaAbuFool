@@ -10,10 +10,6 @@ import Requirements from './Pages/Requirements/Requirements';
 
 function App() {
 
-  function handleLogIn (e){
-    console.log("hello there");
-  }
-
   return (
     <BrowserRouter>
       <Header />
@@ -27,10 +23,6 @@ function App() {
         <Route exact path='/requirements' element={<Requirements/>} />
 
       </Routes>
-      <div>
-      <div>Hello</div>
-      <button value="button" onClick={handleLogIn}>Enter</button>
-    </div>
     </BrowserRouter>
     
   );

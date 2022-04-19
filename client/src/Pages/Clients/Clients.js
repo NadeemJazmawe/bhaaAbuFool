@@ -16,16 +16,26 @@ export default function Clients() {
 
   const getUsers = async () => {
     
-    const response = await axios.get("/user/users");
+    const response = await axios.get("/client/clients");
     if(response.status === 200){
       setData(response.data);
     }
   };
 
   return (
-    <div style={{marginTop: "150px"}}>
+    <div 
+      //style={{marginTop: "150px"}}
+    >
 
-    <div className='search-bar'>
+
+    <div className='search-bar'
+       style={{
+        direction: 'rtl',
+        margin: "auto",
+        padding: "15px",
+        maxWidth: "400px",
+        alignContent: "center",
+      }}>
       <label htmlFor='search'>חפוש</label>
       <input
       type="text"
@@ -42,7 +52,7 @@ export default function Clients() {
     <table className='styled-table'>
       <thead>
         <tr>
-          <th> </th>
+          <th> מס</th>
           <th>שם לקוח</th>
           <th>יצירת קשר</th>
           <th>מייל</th>
