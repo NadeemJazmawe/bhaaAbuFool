@@ -10,9 +10,11 @@ console.log(process.env.DB_URL);
 mongoose.connect(DB_URL);
 mongoose.Promise = global.Promise;
 
-const routers = require('./routers/userRouter');
-app.use("/user", routers);
+const userRouters = require('./routers/userRouter');
+app.use("/user", userRouters);
 
+const reqRouter = require('./routers/reqRouter')
+app.use("/requirement", reqRouter);
 
 port = process.env.port || 3001;
 app.listen(port, () => {

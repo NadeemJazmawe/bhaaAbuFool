@@ -14,7 +14,7 @@ export default function DataPage() {
         </tr>
       </thead>
       <tbody>
-        {data && data.map((item, index) =>{
+        {/* {data && data.map((item, index) =>{
           return (
             <tr key={index}>
               <th scope='row'>{index + 1}</th>
@@ -33,7 +33,7 @@ export default function DataPage() {
               </td>
             </tr>
           )
-        })}
+        })} */}
       </tbody>
     </table>
   </div>

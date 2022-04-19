@@ -12,6 +12,18 @@ router
     .post(userController.AddUser);
 
 
+router
+    .route("/listem")
+    .get(userController.Listem);
+
+
+router
+    .route("/listem")
+    .post(userController.AddListem);
+
+router
+    .route("/listem/:id")
+    .delete(userController.DeleteListem);
 
 
 module.exports = router;
