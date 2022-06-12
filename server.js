@@ -11,8 +11,8 @@ mongoose.connect(DB_URL);
 mongoose.Promise = global.Promise;
 
 
-// const cookieParser = require('cookie-parser');
-// app.use(cookieParser())
+const cookieParser = require('cookie-parser');
+app.use(cookieParser())
 var cors = require('cors');
 app.use(cors(
     {

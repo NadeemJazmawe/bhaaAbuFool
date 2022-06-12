@@ -1,25 +1,20 @@
 import React, { useState } from 'react'
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export default function LogIn() {
 
   const [id, setId] = useState("");
   const [pass, setPass] = useState("");
+  const nav = useNavigate();
 
   const handleLogIn = async (e) => {
     e.preventDefault()
-    fetch('/user/users', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        id: id,
-        pass: pass
-      })
-    }).then(r => r.json())
-        .then(data => {
+    axios.post('/user/login', { id: id, pass: pass })
+        .then(({data}) => {
           if(data.ok){
             console.log({"LogIn": true});
+            // nav('/clients');
           }else{
             console.log({"LogIn": false});
           }

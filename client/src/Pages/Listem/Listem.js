@@ -58,26 +58,26 @@ export default function Listem() {
         }}
         onSubmit={handleAddListem}
       >
-        <label htmlFor='listem-input'>הוסף מסימה</label>
+        <label htmlFor='listem-input'>הוסף משימה</label>
         <input 
           type="text"
           id="listem-input"
           name='listem-input'
-          placeholder='הוסף מסימה'
+          placeholder='הוסף משימה'
           onChange={(e) => {
             setListem(e.target.value)
           }}
           value={listem}
           required={true}
           />
-          <input type="submit" value="הוסף מסימה" />
+          <input type="submit" value="הוסף משימה" />
       </form>
 
       <table className='styled-table' >
         <thead>
           <tr>
             <th>מס</th>
-            <th>מסימה</th>
+            <th>משימה</th>
             <th></th>
           </tr>
         </thead>

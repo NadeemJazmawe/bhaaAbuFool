@@ -1,3 +1,4 @@
+import axios from 'axios';
 import {BrowserRouter, Routes, Route, Link} from 'react-router-dom';
 import './App.css';
 import AddUser from './Pages/AddUser/AddUser';
@@ -13,7 +14,7 @@ function App() {
   return (
     <BrowserRouter>
       <Header />
-
+      
       <Routes>
         <Route exact path='/' element={<Home />} />
         <Route exact path='/adduser' element={<AddUser />} />

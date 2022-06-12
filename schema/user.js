@@ -10,8 +10,11 @@ const UserSchema = new Schema({
     userpass:{
         type: String,
         required: true
-    }
-
+    },
+    type:{
+        type: String,
+        required: true
+    },
 })
 
 const User = mongoose.model("Users", UserSchema);

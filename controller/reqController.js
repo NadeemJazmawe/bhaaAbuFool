@@ -2,25 +2,33 @@ const Requirement = require('../schema/requirement');
 
 
 exports.Requirement = async(req, res) => {
-    Requirement.find({}).then(function(requirement){
-        res.send(requirement);
-    })
+    try {
+        Requirement.find({to: req.cookiesUserid.userid}).then(function(requirement){
+            res.send(requirement);
+        })
+    } catch (error) {
+        res.send({"ok": false});
+    }
 }
 
 exports.AddRequirement = async(req, res) => {
-    const {from, to, text} = req.body;
+    try {
+        const {from, to, text} = req.body;
+        const requirementToAdd = new Requirement({
+            from: req.cookiesUserid.userid,
+            to: to,
+            text: text
+        })
 
-    const requirementToAdd = new Requirement({
-        from: from,
-        to: to,
-        text: text
-    })
+        requirementToAdd.save().then(() => {
+            console.log("requirement Adeed");
+        })
 
-    requirementToAdd.save().then(() => {
-        console.log("requirement Adeed");
-    })
-
-    res.send({"ok":true});
+        res.send({"ok":true, "msg": "requirments added!"});   
+    } catch (error) {
+        console.log("error from AddRequirement");
+        res.send({"ok": false});
+    }
 }
 
 

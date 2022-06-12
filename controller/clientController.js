@@ -7,18 +7,21 @@ exports.Clients = async(req, res) => {
 }
 
 exports.AddClient = async(req,res) => {
-    const {name, phone, email} = req.body;
-    const ClientToAdd = new Client({
-        name: name,
-        phone: phone,
-        mail: email
-    })
-
-    ClientToAdd.save().then(()=> {
-        console.log("Client saved");
-    })
-
-    res.send({"ok":true});
+    try {
+        const {name, phone, email} = req.body;
+        const ClientToAdd = new Client({
+            name: name,
+            phone: phone,
+            mail: email
+        })
+    
+        ClientToAdd.save().then(()=> {
+            console.log("Client saved");
+        })
+        res.send({"ok":true});   
+    } catch (error) {
+        res.send({"ok": false, "error": "failed to add client!"});   
+    }
 }
 
 

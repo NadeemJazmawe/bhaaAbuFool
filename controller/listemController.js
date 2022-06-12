@@ -1,23 +1,27 @@
 const Listem = require('../schema/listem');
 
 exports.Listem = async(req, res) => {
-    Listem.find({"name": req.query.name }).then(function(listems){
+    Listem.find({"name": req.cookiesUserid.userid }).then(function(listems){
         res.send(listems);
     })
 }
 
 exports.AddListem = async(req, res) => {
-    const {name, text} = req.body;
+    try {
+        const {name, text} = req.body;
 
-    const ListemToAdd = new Listem({
-        name: name,
-        text: text
-    })
+        const ListemToAdd = new Listem({
+            name: name,
+            text: text
+        })
 
-    ListemToAdd.save().then(() => {
-        console.log("listem Added!");
-    })
-    res.send({"ok":true});
+        ListemToAdd.save().then(() => {
+            console.log("listem Added!");
+        })
+        res.send({"ok":true});
+    } catch (error) {
+        res.send({"ok": false, "error": "failed to add listem!"});   
+    }
 }
 
 exports.DeleteListem = async(req, res) => {
