@@ -6,11 +6,22 @@ export default function DataPage() {
     <table className='styled-table'>
       <thead>
         <tr>
-          <th>No.</th>
-          <th>Name</th>
-          <th>Phone</th>
-          <th>Email</th>
-          <th> </th>
+          <th rowSpan="2" >מס</th>
+          <th rowSpan="2">שם לקוח</th>
+          <th rowSpan="2">חומר מעמ</th>
+          <th rowSpan="2">קבלת דיווח שעות</th>
+          <th colSpan="5">דיווחים</th> 
+          <th rowSpan="2">סטטוס תשלומים ללקוח</th>
+          <th rowSpan="2">גביית שכ"ט למשרד</th>
+          </tr>
+          <tr>
+          <th>מעמ</th>
+          <th>מקדימות מס הכנסה</th>
+          <th>ביטוח ליאומי</th>
+          <th>ניכויים עובדים</th>
+          <th>ביטוח ליאומי לעובדים</th>
+
+
         </tr>
       </thead>
       <tbody>

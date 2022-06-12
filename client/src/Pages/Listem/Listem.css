@@ -1,6 +1,8 @@
 .styled-table{
     direction: rtl;
-    border-collapse: collapse;
+    /* border-collapse: collapse; */
+    border: black;
+    border: 1px;
     margin: auto;
     font-size: 0.9em;
     font-family: sans-serif;
