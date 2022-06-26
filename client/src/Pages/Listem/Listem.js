@@ -5,15 +5,15 @@ export default function Listem() {
 
   const [data, setData] = useState("");
   const [listem, setListem] = useState("");
+  const [endDate, setEndDate] = useState("");
 
 
   useEffect(() => {
-    getUsers();
+    getListem();
   }, [])
 
-  const getUsers = async () => {
-    const name = "nadeem";
-    const response = await axios.get("/listem",{params : {name}});
+  const getListem = async () => {
+    const response = await axios.get("/listem");
       if(response.status === 200){
         setData(response.data);
       }
@@ -26,8 +26,8 @@ export default function Listem() {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        name: "nadeem",
-        text: listem
+        text: listem,
+        endDate: endDate
       })
     }).then(r => r.json())
         .then(data => {
@@ -41,7 +41,7 @@ export default function Listem() {
 
   const deleteListem = async (_id) => {
     await axios.delete(`/listem/${_id}`);
-    getUsers();
+    getListem();
   }
 
 
@@ -58,19 +58,33 @@ export default function Listem() {
         }}
         onSubmit={handleAddListem}
       >
-        <label htmlFor='listem-input'>הוסף משימה</label>
+        <label htmlFor='endDate-input'>הוסף משימה</label>
         <input 
           type="text"
           id="listem-input"
           name='listem-input'
-          placeholder='הוסף משימה'
+          placeholder='משימה'
           onChange={(e) => {
             setListem(e.target.value)
           }}
           value={listem}
+          required={false}
+        />
+
+        <label htmlFor='endDate-input'>לסיים לפני</label>
+        <input 
+          type="text"
+          id="endDate-input"
+          name='endDate-input'
+          placeholder=' זמן סיום'
+          onChange={(e) => {
+            setEndDate(e.target.value)
+          }}
+          value={endDate}
           required={true}
-          />
-          <input type="submit" value="הוסף משימה" />
+        />
+
+        <input type="submit" value="הוסף משימה" />
       </form>
 
       <table className='styled-table' >
@@ -78,6 +92,8 @@ export default function Listem() {
           <tr>
             <th>מס</th>
             <th>משימה</th>
+            <th>התקבל ב</th>
+            <th>לסיים לפני</th>
             <th></th>
           </tr>
         </thead>
@@ -87,6 +103,8 @@ export default function Listem() {
               <tr key={index}>
                 <th scope='row'>{index+1}</th>
                 <th>{item.text}</th>
+                <th>{item.startDate}</th>
+                <th>{item.endDate}</th>
                 <th>
                   <button className='btn btn-delete' onClick={ () => {deleteListem(item._id)}}>מחיקה</button>
                 </th>

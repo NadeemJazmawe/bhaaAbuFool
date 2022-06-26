@@ -8,11 +8,14 @@ exports.Listem = async(req, res) => {
 
 exports.AddListem = async(req, res) => {
     try {
-        const {name, text} = req.body;
+        const {text, endDate} = req.body;
+        let date = new Date();
 
         const ListemToAdd = new Listem({
-            name: name,
-            text: text
+            name: req.cookiesUserid.userid,
+            text: text,
+            startDate: date.getDate() + "/" + (date.getMonth()+1),
+            endDate: endDate
         })
 
         ListemToAdd.save().then(() => {

@@ -14,7 +14,14 @@ const RequiremnetSchema = new Schema({
     text:{
         type: String,
         required: true
+    },
+    startDate:{
+        type: String
+    },
+    endDate:{
+        type: String
     }
+
 })
 
 const Requirment = mongoose.model("Requirement", RequiremnetSchema);

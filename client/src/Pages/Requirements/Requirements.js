@@ -7,6 +7,8 @@ export default function Requirements() {
   const [data, setData] = useState("");
   const [to, setTo] = useState("");
   const [text, setText] = useState("");
+  const [endDate, setEndDate] = useState("");
+
 
   useEffect(() => {
     getRequirement();
@@ -26,9 +28,9 @@ export default function Requirements() {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        from: "nadeem",
         to: to,
-        text: text
+        text: text,
+        endDate: endDate
       })
     }).then(r => r.json())
         .then(data => {
@@ -84,7 +86,21 @@ export default function Requirements() {
           value={text}
           required={true}
           />
-          <input type="submit" value="שלח דרישה" />
+
+        <label htmlFor='endDate-input'>לסיים לפני</label>
+        <input 
+          type="text"
+          id="endDate-input"
+          name='endDate-input'
+          placeholder=' זמן סיום'
+          onChange={(e) => {
+            setEndDate(e.target.value)
+          }}
+          value={endDate}
+          required={false}
+        />
+          
+        <input type="submit" value="שלח דרישה" />
       </form>
 
       <table className='styled-table' >
@@ -93,6 +109,8 @@ export default function Requirements() {
             <th>מס</th>
             <th>התקבלה מ</th>
             <th>נוסח</th>
+            <th>התקבל ב</th>
+            <th>לסיים לפני</th>
             <th></th>
           </tr>
         </thead>
@@ -103,6 +121,8 @@ export default function Requirements() {
                 <th scope='row'>{index+1}</th>
                 <th>{item.from}</th>
                 <th>{item.text}</th>
+                <th>{item.startDate}</th>
+                <th>{item.endDate}</th>
                 <th>
                   <button className='btn btn-delete' onClick={ () => {DeleteRequirement(item._id)}}>מחיקה</button>
                 </th>

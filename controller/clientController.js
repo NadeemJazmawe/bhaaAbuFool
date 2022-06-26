@@ -1,9 +1,13 @@
 const Client = require('../schema/client');
 
 exports.Clients = async(req, res) => {
-    Client.find({}).then(function(clients){
-        res.send(clients);
-    })
+    try {
+        Client.find({}).then(function(clients){
+            res.send(clients);
+        })
+    } catch (error) {
+        res.send({"ok": false, "error": "failed to find client!"});   
+    }
 }
 
 exports.AddClient = async(req,res) => {

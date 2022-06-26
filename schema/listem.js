@@ -10,7 +10,14 @@ const ListemSchema = new Schema({
     text:{
         type:String,
         required: true
+    },
+    startDate:{
+        type: String
+    },
+    endDate:{
+        type: String
     }
+
 })
 
 

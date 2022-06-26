@@ -13,11 +13,14 @@ exports.Requirement = async(req, res) => {
 
 exports.AddRequirement = async(req, res) => {
     try {
-        const {from, to, text} = req.body;
+        let date = new Date();
+        const {to, text, endDate} = req.body;
         const requirementToAdd = new Requirement({
             from: req.cookiesUserid.userid,
             to: to,
-            text: text
+            text: text,
+            startDate: date.getDate() + "/" + (date.getMonth()+1),
+            endDate: endDate
         })
 
         requirementToAdd.save().then(() => {

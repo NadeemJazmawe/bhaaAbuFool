@@ -14,7 +14,9 @@ export default function LogIn() {
         .then(({data}) => {
           if(data.ok){
             console.log({"LogIn": true});
-            // nav('/clients');
+            nav('/clients');
+
+            window.location.reload(false);
           }else{
             console.log({"LogIn": false});
           }
