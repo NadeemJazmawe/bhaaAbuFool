@@ -5,9 +5,15 @@ const app = express();
 app.use(express.json());
 
 const mongoose = require('mongoose');
-const DB_URL = "mongodb://localhost/bahaa" ; //process.env.DB_URL;
-console.log(process.env.DB_URL);
-mongoose.connect(DB_URL);
+const DB_URL = process.env.DB_URL || "mongodb://localhost/bahaa" ;
+mongoose.connect(DB_URL)
+    .then(() => {
+        console.log('Connected to the database ')
+    })
+    .catch((err) => {
+        console.error(`Error connecting to the database. ${err}`);
+    })
+
 mongoose.Promise = global.Promise;
 
 
