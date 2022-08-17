@@ -15,14 +15,14 @@ export default function LogIn() {
         .then(({data}) => {
           if(data.ok){
             console.log({"LogIn": true});
-            window.location.reload(false);
-
-            navigate('/clients');
+            window.location.reload(true);
+            window.location.replace("/clients");
           }else{
             console.log({"LogIn": false});
           }
         })
   }
+
 
   return (
     <div className='login'> 

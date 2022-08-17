@@ -16,12 +16,12 @@ function App() {
       <Header />
       
       <Routes>
-        <Route exact path='/' element={<Home />} />
-        <Route exact path='/adduser' element={<AddUser />} />
-        <Route exact path='/clients' element={<Clients />} />
-        <Route exact path='/listem' element={<Listem />} />
-        <Route exact path='/data' element={<DataPage/>} />
-        <Route exact path='/requirements' element={<Requirements/>} />
+        <Route path='/' element={<Home />} />
+        <Route path='/clients' element={<Clients />} />
+        <Route path='/adduser' element={<AddUser />} />
+        <Route path='/listem' element={<Listem />} />
+        <Route path='/data' element={<DataPage/>} />
+        <Route path='/requirements' element={<Requirements/>} />
 
       </Routes>
     </BrowserRouter>

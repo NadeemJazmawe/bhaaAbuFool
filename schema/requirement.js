@@ -20,6 +20,9 @@ const RequiremnetSchema = new Schema({
     },
     endDate:{
         type: String
+    },
+    done:{
+        type: Boolean
     }
 
 })

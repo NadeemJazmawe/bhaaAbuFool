@@ -4,16 +4,19 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import "./Header.css";
 
 export default function Header() {
+    
     const nav = useNavigate();
-  const [activeTab, setActiveTab] = useState("Home");
-  const [logged, setLogged ] = useState(false);
+    const [activeTab, setActiveTab] = useState("Home");
+    const [logged, setLogged ] = useState(false);
 
   const location = useLocation();
   useEffect( () => {
         axios.get("/user/checkConnection").then(({data}) => {
             if(data.ok){
+                console.log("heelo");
                 setLogged(true);
             }else{
+                console.log("fuck react");
                 nav('/');
             }
         });

@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import {useNavigate} from "react-router-dom";
 import axios from 'axios';
+import "./Requirements.css"
 
 
 export default function Requirements() {
 
-  const [data, setData] = useState("");
+  const [getData, setGetData] = useState("");
+  const [sendData, setSendData] = useState("");
   const [to, setTo] = useState("");
   const [text, setText] = useState("");
   const [endDate, setEndDate] = useState("");
@@ -18,9 +20,21 @@ export default function Requirements() {
   }, [])
 
   const getRequirement = async () => {
-    const response = await axios.get("/requirement/requirements");
+    setgetRequirement();
+    setsendRequirement();
+  }
+
+  const setgetRequirement = async () => {
+    const response = await axios.get("/requirement/getrequirements");
     if(response.status === 200){
-      setData(response.data);
+      setGetData(response.data);
+    }
+  }
+
+  const setsendRequirement = async () => {
+    const response = await axios.get("/requirement/sendrequirements");
+    if(response.status === 200){
+      setSendData(response.data);
     }
   }
 
@@ -51,6 +65,29 @@ export default function Requirements() {
   const DeleteRequirement = async (_id) => {
     await axios.delete(`/requirement/delete/${_id}`);
     getRequirement();
+  }
+
+  const UpdateRequirement = async (_id, done) => {
+    // e.preventDefault();
+    const newdone = !done;
+    fetch(`/requirement/update/${_id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        done: newdone
+      })
+    }).then(r => r.json())
+        .then(data => {
+          if(data.ok){
+            console.log({"Requiremnet Updated": true});
+            getRequirement();
+            navigate('/requirements');
+          }else{
+            console.log({"Requiremnet Updated": false});
+          }
+        })
   }
 
 
@@ -109,6 +146,11 @@ export default function Requirements() {
         <input type="submit" value="שלח דרישה" />
       </form>
 
+
+      <div class="line"></div>
+
+      <h2>דרישות שהתקבלו</h2>
+      
       <table className='styled-table' >
         <thead>
           <tr>
@@ -117,11 +159,11 @@ export default function Requirements() {
             <th>נוסח</th>
             <th>התקבל ב</th>
             <th>לסיים לפני</th>
-            <th></th>
+            <th>מצב בקשה</th>
           </tr>
         </thead>
         <tbody>
-          {data && data.map((item, index) => {
+          {getData && getData.map((item, index) => {
             return(
               <tr key={index}>
                 <th scope='row'>{index+1}</th>
@@ -129,6 +171,44 @@ export default function Requirements() {
                 <th>{item.text}</th>
                 <th>{item.startDate}</th>
                 <th>{item.endDate}</th>
+                <th>
+                  <button className={`btn + ${item.done ? 'btn-edit' : 'btn-delete'}`} onClick={ () => {UpdateRequirement(item._id, item.done)}}>שינוי מצב</button>
+                </th>
+              </tr>
+            )
+          })}
+        </tbody>
+      </table>
+
+      <div class="line"></div>
+
+
+      <h2>דרישות שנשלחו</h2>
+
+      <table className='styled-table' >
+        <thead>
+          <tr>
+            <th>מס</th>
+            <th>נשלח ל</th>
+            <th>נוסח</th>
+            <th>התקבל ב</th>
+            <th>לסיים לפני</th>
+            <th>מצב בקשה</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {sendData && sendData.map((item, index) => {
+            return(
+              <tr key={index}>
+                <th scope='row'>{index+1}</th>
+                <th>{item.to}</th>
+                <th>{item.text}</th>
+                <th>{item.startDate}</th>
+                <th>{item.endDate}</th>
+                <th>
+                  <button className={`btn + ${item.done ? 'btn-edit' : 'btn-delete'}`} onClick={ () => {}}> בוצע</button>
+                </th>
                 <th>
                   <button className='btn btn-delete' onClick={ () => {DeleteRequirement(item._id)}}>מחיקה</button>
                 </th>

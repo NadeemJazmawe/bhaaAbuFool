@@ -2,9 +2,30 @@ const Requirement = require('../schema/requirement');
 
 
 exports.Requirement = async(req, res) => {
+
     try {
-        Requirement.find({to: req.cookiesUserid.userid}).then(function(requirement){
-            res.send(requirement);
+        Requirement.find({to: req.cookiesUserid.userid}).then(function(getRequirement){
+            res.send(getRequirement);
+        })
+    } catch (error) {
+        res.send({"ok": false});
+    }
+}
+
+exports.SendRequirement = async(req, res) => {
+    // console.log("nana");
+
+    // try {
+    //     Requirement.find({to: req.cookiesUserid.userid}).then(function(getRequirement){
+    //         res.send(getRequirement);
+    //     })
+    // } catch (error) {
+    //     res.send({"ok": false});
+    // }
+
+    try {
+        Requirement.find({from: req.cookiesUserid.userid}).then(function(sendRequirement){
+            res.send(sendRequirement);
         })
     } catch (error) {
         res.send({"ok": false});
@@ -20,7 +41,8 @@ exports.AddRequirement = async(req, res) => {
             to: to,
             text: text,
             startDate: date.getDate() + "/" + (date.getMonth()+1),
-            endDate: endDate
+            endDate: endDate,
+            done: false
         })
 
         requirementToAdd.save().then(() => {
@@ -42,3 +64,14 @@ exports.DeleteRequirement = async(req, res) => {
         res.send({"ok": true});
     })
 }
+
+
+exports.UpdateRequirement = async(req, res) => {
+    // res.send({"ok": true});
+    const {done} = req.body;
+
+    Requirement.findByIdAndUpdate({_id: req.params.id},{done: done}).then(() => {
+        res.send({"ok": true});
+    })
+}
+

@@ -4,9 +4,12 @@ const reqController = require('../controller/reqController');
 const UserController = require("../controller/userController");
 
 router
-    .route("/requirements")
+    .route("/getrequirements")
     .get(UserController.checkCookies, reqController.Requirement)
 
+router
+    .route("/sendrequirements")
+    .get(UserController.checkCookies, reqController.SendRequirement)
 
 router
     .route("/add")
@@ -16,5 +19,10 @@ router
     .route("/delete/:id")
     .delete(reqController.DeleteRequirement)
 
+router
+    .route("/update/:id")
+    .post(reqController.UpdateRequirement)
+
+    
 
 module.exports = router;
