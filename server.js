@@ -5,7 +5,7 @@ const app = express();
 
 
 
-// app.use(express.static("client/build"));
+app.use(express.static("client/build"));
 app.use(express.json());
 
 
@@ -25,13 +25,13 @@ mongoose.Promise = global.Promise;
 const cookieParser = require('cookie-parser');
 app.use(cookieParser())
 
-var cors = require('cors');
-app.use(cors(
-    {
-      origin: 'http://localhost:3000',
-      optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-    }
-  ));
+// var cors = require('cors');
+// app.use(cors(
+//     {
+//       origin: 'http://localhost:3000',
+//       optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+//     }
+//   ));
 
 const UserRouter = require('./routers/userRouter');
 app.use("/user", UserRouter);
