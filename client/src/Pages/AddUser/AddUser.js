@@ -12,7 +12,7 @@ export default function AddUser() {
 
   function handleRegister (e){
     e.preventDefault();
-    console.log({name:name, phone: phone, mail:email});
+    // console.log({name:name, phone: phone, mail:email});
     fetch('/client/addclient',{
       method: 'POST',
       headers: {
@@ -27,7 +27,7 @@ export default function AddUser() {
         .then(data => {
           if(data.ok){
             console.log({"User added": true});
-            navigate('/clients')
+            navigate('/clients');
           }else{
             console.log({"User added": false});
           }

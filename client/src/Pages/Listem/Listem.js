@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import {useNavigate} from "react-router-dom";
 
 export default function Listem() {
 
@@ -7,20 +8,22 @@ export default function Listem() {
   const [listem, setListem] = useState("");
   const [endDate, setEndDate] = useState("");
 
+  const navigate = useNavigate();
 
   useEffect(() => {
     getListem();
   }, [])
 
   const getListem = async () => {
-    const response = await axios.get("/listem");
+    const response = await axios.get("/blistem");
       if(response.status === 200){
         setData(response.data);
       }
   }
 
   const handleAddListem = (e) => {
-    fetch('/listem', {
+    e.preventDefault();
+    fetch('/blistem', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -33,6 +36,8 @@ export default function Listem() {
         .then(data => {
           if(data.ok){
             console.log({"User added": true});
+            getListem();
+            navigate('/listem')
           }else{
             console.log({"User added": false});
           }
@@ -40,7 +45,7 @@ export default function Listem() {
   }
 
   const deleteListem = async (_id) => {
-    await axios.delete(`/listem/${_id}`);
+    await axios.delete(`/blistem/${_id}`);
     getListem();
   }
 

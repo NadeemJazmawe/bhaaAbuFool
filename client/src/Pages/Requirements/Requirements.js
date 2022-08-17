@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import {useNavigate} from "react-router-dom";
 import axios from 'axios';
 
 
@@ -8,6 +9,8 @@ export default function Requirements() {
   const [to, setTo] = useState("");
   const [text, setText] = useState("");
   const [endDate, setEndDate] = useState("");
+
+  const navigate = useNavigate();
 
 
   useEffect(() => {
@@ -22,6 +25,7 @@ export default function Requirements() {
   }
 
   const handleAddRequirment = (e) => {
+    e.preventDefault();
     fetch("/requirement/add", {
       method: 'POST',
       headers: {
@@ -36,6 +40,8 @@ export default function Requirements() {
         .then(data => {
           if(data.ok){
             console.log({"User added": true});
+            getRequirement();
+            navigate('/requirements');
           }else{
             console.log({"User added": false});
           }
