@@ -6,7 +6,8 @@ export default function LogIn() {
 
   const [id, setId] = useState("");
   const [pass, setPass] = useState("");
-  const nav = useNavigate();
+
+  const navigate = useNavigate();
 
   const handleLogIn = async (e) => {
     e.preventDefault()
@@ -14,9 +15,8 @@ export default function LogIn() {
         .then(({data}) => {
           if(data.ok){
             console.log({"LogIn": true});
-            nav('/clients');
-
-            window.location.reload(false);
+            navigate('/clients');
+            // window.location.reload(false);
           }else{
             console.log({"LogIn": false});
           }
