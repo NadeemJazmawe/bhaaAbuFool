@@ -45,7 +45,7 @@ app.use("/blistem", listemRouter);
 const reqRouter = require('./routers/reqRouter');
 app.use("/requirement", reqRouter);
 
-port = process.env.port || 3001;
+port = process.env.PORT  || 3001;
 app.listen(port, () => {
     console.log(`Server running on port ${port} 🔥`)
 })
