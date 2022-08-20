@@ -1,6 +1,248 @@
-import React from 'react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
+import {useNavigate} from "react-router-dom";
+
+
+
 
 export default function DataPage() {
+
+  const [data, setData] = useState("");
+
+  const navigate = useNavigate();
+
+
+  useEffect(() => {
+    getdata();
+  }, [])
+
+  const getdata = async () => {
+    axios.post("/getdata/updatedata")
+
+
+    const response = await axios.get("/getdata/getdata");
+    if(response.status === 200){
+      setData(response.data);
+    }
+  }
+  
+
+  const UpdatevatMaterial = async (_id, done) => {
+    const newdone = !done;
+    fetch(`/getdata/vatMaterial/${_id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        vatMaterial: newdone
+      })
+    }).then(r => r.json())
+        .then(data => {
+          if(data.ok){
+            console.log({"vatMaterial Updated": true});
+            getdata();
+            navigate('/data');
+          }else{
+            console.log({"vatMaterial Updated": false});
+          }
+        })
+  
+  }
+
+
+
+  const UpdatehourlyReport = async (_id, done) => {
+    const newdone = !done;
+    fetch(`/getdata/hourlyReport/${_id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        hourlyReport: newdone
+      })
+    }).then(r => r.json())
+        .then(data => {
+          if(data.ok){
+            console.log({"hourlyReport Updated": true});
+            getdata();
+            navigate('/data');
+          }else{
+            console.log({"hourlyReport Updated": false});
+          }
+        })
+  
+  }
+
+
+  const Updatevat = async (_id, done) => {
+    const newdone = !done;
+    fetch(`/getdata/vat/${_id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        vat: newdone
+      })
+    }).then(r => r.json())
+        .then(data => {
+          if(data.ok){
+            console.log({"vat Updated": true});
+            getdata();
+            navigate('/data');
+          }else{
+            console.log({"vat Updated": false});
+          }
+        })
+  
+  }
+
+
+  const UpdatetaxAdvances = async (_id, done) => {
+    const newdone = !done;
+    fetch(`/getdata/taxAdvances/${_id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        taxAdvances: newdone
+      })
+    }).then(r => r.json())
+        .then(data => {
+          if(data.ok){
+            console.log({"taxAdvances Updated": true});
+            getdata();
+            navigate('/data');
+          }else{
+            console.log({"taxAdvances Updated": false});
+          }
+        })
+  
+  }
+
+
+  const UpdatesocialSecurity = async (_id, done) => {
+    const newdone = !done;
+    fetch(`/getdata/socialSecurity/${_id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        socialSecurity: newdone
+      })
+    }).then(r => r.json())
+        .then(data => {
+          if(data.ok){
+            console.log({"socialSecurity Updated": true});
+            getdata();
+            navigate('/data');
+          }else{
+            console.log({"socialSecurity Updated": false});
+          }
+        })
+  
+  }
+
+
+  const UpdateemployeeDeductions = async (_id, done) => {
+    const newdone = !done;
+    fetch(`/getdata/employeeDeductions/${_id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        employeeDeductions: newdone
+      })
+    }).then(r => r.json())
+        .then(data => {
+          if(data.ok){
+            console.log({"employeeDeductions Updated": true});
+            getdata();
+            navigate('/data');
+          }else{
+            console.log({"employeeDeductions Updated": false});
+          }
+        })
+  
+  }
+
+  const UpdateemployeesSocialSecurity = async (_id, done) => {
+    const newdone = !done;
+    fetch(`/getdata/employeesSocialSecurity/${_id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        employeesSocialSecurity: newdone
+      })
+    }).then(r => r.json())
+        .then(data => {
+          if(data.ok){
+            console.log({"employeesSocialSecurity Updated": true});
+            getdata();
+            navigate('/data');
+          }else{
+            console.log({"employeesSocialSecurity Updated": false});
+          }
+        })
+  
+  }
+  const UpdatePaymentStatus = async (_id, done) => {
+    const newdone = !done;
+    fetch(`/getdata/PaymentStatus/${_id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        PaymentStatus: newdone
+      })
+    }).then(r => r.json())
+        .then(data => {
+          if(data.ok){
+            console.log({"PaymentStatus Updated": true});
+            getdata();
+            navigate('/data');
+          }else{
+            console.log({"PaymentStatus Updated": false});
+          }
+        })
+  
+  }
+  const UpdateexpensesCollection = async (_id, done) => {
+    const newdone = !done;
+    // console.log("hero");
+    fetch(`/getdata/expensesCollection/${_id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        expensesCollection: newdone
+      })
+    }).then(r => r.json())
+        .then(data => {
+          if(data.ok){
+            console.log({"expensesCollection Updated": true});
+            getdata();
+            navigate('/data');
+          }else{
+            console.log({"expensesCollection Updated": false});
+          }
+        })
+  
+  }
+
+
+
+
+
   return (
     <div style={{marginTop: "150px"}}>
     <table className='styled-table'>
@@ -25,14 +267,41 @@ export default function DataPage() {
         </tr>
       </thead>
       <tbody>
-        {/* {data && data.map((item, index) =>{
+        {data && data.map((item, index) =>{
           return (
             <tr key={index}>
               <th scope='row'>{index + 1}</th>
               <td>{item.name}</td>
-              <td>{item.phone}</td>
-              <td>{item.mail}</td>
               <td>
+                <button className={`btn + ${item.vatMaterial ? 'btn-edit' : 'btn-delete'}`} onClick={ () => {UpdatevatMaterial(item._id, item.vatMaterial)}}>מסר</button>
+              </td>
+              <td>
+                  <button className={`btn + ${item.hourlyReport ? 'btn-edit' : 'btn-delete'}`} onClick={ () => {UpdatehourlyReport(item._id, item.hourlyReport)}}>מסר</button>
+              </td>
+              <td>
+                  <button className={`btn + ${item.vat ? 'btn-edit' : 'btn-delete'}`} onClick={ () => {Updatevat(item._id, item.vat)}}>שודר</button>
+              </td>
+              <td>
+                  <button className={`btn + ${item.taxAdvances ? 'btn-edit' : 'btn-delete'}`} onClick={ () => {UpdatetaxAdvances(item._id, item.taxAdvances)}}>שודר</button>
+              </td>
+              <td>
+                  <button className={`btn + ${item.socialSecurity ? 'btn-edit' : 'btn-delete'}`} onClick={ () => {UpdatesocialSecurity(item._id, item.socialSecurity)}}>שודר</button>
+              </td>
+              <td>
+                  <button className={`btn + ${item.employeeDeductions ? 'btn-edit' : 'btn-delete'}`} onClick={ () => {UpdateemployeeDeductions(item._id, item.employeeDeductions)}}>שודר</button>
+              </td>
+              <td>
+                  <button className={`btn + ${item.employeesSocialSecurity ? 'btn-edit' : 'btn-delete'}`} onClick={ () => {UpdateemployeesSocialSecurity(item._id, item.employeesSocialSecurity)}}>שודר</button>
+              </td>
+              <td>
+                  <button className={`btn + ${item.PaymentStatus ? 'btn-edit' : 'btn-delete'}`} onClick={ () => {UpdatePaymentStatus(item._id, item.PaymentStatus)}}>שודר</button>
+              </td>
+              <td>
+                  <button className={`btn + ${item.expensesCollection ? 'btn-edit' : 'btn-delete'}`} onClick={ () => {UpdateexpensesCollection(item._id, item.expensesCollection)}}>שודר</button>
+              </td>
+        
+
+              {/* <td>
                 <Link 
                   to={`/edit/${item._id}`}
                   state={{
@@ -41,10 +310,10 @@ export default function DataPage() {
                  >
                   <button className='btn btn-edit' data={item} >Edit</button>
                 </Link>
-              </td>
+              </td> */}
             </tr>
           )
-        })} */}
+        })}
       </tbody>
     </table>
   </div>

@@ -13,10 +13,8 @@ export default function Header() {
   useEffect( () => {
         axios.get("/user/checkConnection").then(({data}) => {
             if(data.ok){
-                console.log("heelo");
                 setLogged(true);
             }else{
-                console.log("fuck react");
                 nav('/');
             }
         });

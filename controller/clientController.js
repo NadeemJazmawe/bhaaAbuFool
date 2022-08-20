@@ -3,6 +3,7 @@ const Client = require('../schema/client');
 exports.Clients = async(req, res) => {
     try {
         Client.find({}).then(function(clients){
+            // console.log(clients);
             res.send(clients);
         })
     } catch (error) {
