@@ -3,6 +3,20 @@ const Schema = mongoose.Schema;
 
 
 const DataSchema = new Schema({
+    allFilled: {
+        type: Boolean
+    },
+    month: {
+        type: String,
+        required: true
+    },
+    year: {
+        type: String,
+        required: true
+    },
+    numberOfElements: {
+        type: Number,
+    },
     key:{
         type: String,
         required: true

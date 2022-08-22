@@ -7,23 +7,48 @@ import {useNavigate} from "react-router-dom";
 
 export default function DataPage() {
 
-  const [data, setData] = useState("");
-
   const navigate = useNavigate();
+  const newDate = new Date()
+
+  const [data, setData] = useState("");
+  const [year, setYear] = useState(newDate.getFullYear());
+  const [month, setMonth] = useState(newDate.getMonth()+1);
 
 
+
+
+  // useEffect(() => {
+  //   console.log("jeme");
+  //   getdata();
+  // }, [data, year])
   useEffect(() => {
-    getdata();
+    console.log("jeme");
   }, [])
 
   const getdata = async () => {
-    axios.post("/getdata/updatedata")
+    // axios.post("/getdata/updatedata")
 
+    fetch("/getdata/getdata", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        month: month,
+        year: year,
+      })
+    }).then((response) => response.json())
+    .then((data) => 
+      setData(data)
+    );
 
-    const response = await axios.get("/getdata/getdata");
-    if(response.status === 200){
-      setData(response.data);
-    }
+    // console.log(response);
+    // console.log(response.data);
+
+    // if(response.status === 200){
+    //   setData(response.data);
+    // }
+    
   }
   
 
@@ -245,6 +270,60 @@ export default function DataPage() {
 
   return (
     <div style={{marginTop: "150px"}}>
+
+      {/* <form  style={{
+            direction: 'rtl',
+            margin: "auto",
+            padding: "15px",
+            maxWidth: "400px",
+            alignContent: "center",
+          }}
+        >
+
+        <label for="date">Choose Date:</label> */}
+
+        <input 
+          type="text"
+          id="year-input"
+          name='year-input'
+          placeholder = {`${year}`}
+          onChange={(e) => {
+            setYear(e.target.value)
+          }}
+          value={year}
+          required={false}
+        />
+        <input 
+          type="text"
+          id="month-input"
+          name='month-input'
+          placeholder = {`${month}`}
+          onChange={(e) => {
+            setMonth(e.target.value)
+          }}
+          value={month}
+          required={false}
+        />
+
+        {/* <select name="month" id="month" onChange="setMonth(this)">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="1">3</option>
+          <option value="1">4</option>
+          <option value="1">5</option>
+          <option value="1">6</option>
+          <option value="1">7</option>
+          <option value="1">8</option>
+          <option value="1">9</option>
+          <option value="1">10</option>
+          <option value="1">11</option>
+          <option value="1">12</option>
+        </select> */}
+
+        {/* <input type="submit" value="Search" /> */}
+      {/* </form> */}
+  
+
     <table className='styled-table'>
       <thead>
         <tr>

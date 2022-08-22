@@ -5,8 +5,9 @@ const app = express();
 
 
 
-// app.use(express.static("client/build"));
+app.use(express.static("client/build"));
 app.use(express.json());
+
 
 
 const mongoose = require('mongoose');
@@ -47,6 +48,12 @@ app.use("/requirement", reqRouter);
 
 const dataRouter = require('./routers/dataRouter');
 app.use("/getdata", dataRouter);
+
+
+const path = require('path');
+app.get('/*', (req,res) => {
+    res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'))
+})
 
 port = process.env.PORT  || 3001;
 app.listen(port, () => {

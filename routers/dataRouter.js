@@ -6,7 +6,7 @@ const UserController = require("../controller/userController");
 
 router
     .route("/getdata")
-    .get(UserController.checkCookies, dataController.GetData)
+    .post(UserController.checkCookies, dataController.GetData)
 
 router
     .route("/updatedata")
