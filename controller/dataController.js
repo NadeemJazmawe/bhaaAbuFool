@@ -3,41 +3,48 @@ const Client = require('../schema/client');
 
 exports.GetData = async(req, res) => {
     try {
-        const {month, year} = req.body;
-        Data.find({month: month, year: year}).then(function(getData){
-            console.log(getData);
+        const {month, year, deficiency} = req.body;
+        if(deficiency){
+            Data.find({month: month, year: year,
+                $or: [{vatMaterial: false},
+                {hourlyReport : false},
+                {vat : false},
+                {taxAdvances : false},
+                {socialSecurity : false},
+                {employeeDeductions : false},
+                {employeesSocialSecurity : false},
+                {PaymentStatus : false},
+                {expensesCollection  : false}]}).then(function(getData){
+                res.send(getData);
+            })
+        }else{
+            Data.find({month: month, year: year}).then(function(getData){
             res.send(getData);
-        })
+            })
+        }
+        
     } catch (error) {
         res.send({"ok": false});
     }
-    // console.log("asdasd");
-    // try {
-    //     Data.find({}).then(function(getData){
-    //         console.log(getData);
-    //         res.send(getData);
-    //     })
-    // } catch (error) {
-    //     res.send({"ok": false});
-    // }
+
 }
 
-exports.UpdateData = async(req, res) => {
+exports.BuildData = async(req, res) => {
     try {
+        console.log("here");
         Client.find({}).then(function(clients){
             let length = clients.length
             for(let i=0 ; i < length ; i++){
-                // console.log(clients[i].name);
                 let id = clients[i]._id
                 let name = clients[i].name
+                const {month, year} = req.body;
 
-                let date = new Date();
+                Data.findOne({key: id, month: month, year: year}).then(function(dd){
+                    console.log("here2");
 
-                let month = date.getMonth() + 1
-                let year = date.getFullYear()
-                
-                Data.findOne({key: id}).then(function(dd){
                     if(dd === null){
+                        console.log("here3");
+
                         const dataToAdd = new Data({
                                 key: id,
                                 name: name,
@@ -57,47 +64,36 @@ exports.UpdateData = async(req, res) => {
     }
 }
 
-exports.findByData = async(req, res) => {
+exports.DeleteData = async(req, res) => {
     try {
         const {month, year} = req.body;
-        Data.find({month: month, year: year}).then(function(getData){
-            res.send(getData);
+        console.log("asdasd");
+       
+        Data.find({month: month, year: year}).then(function(clients){
+            let length = clients.length
+
+            for(let i=0 ; i < length ; i++){
+                let id = clients[i].id
+                console.log(id);
+                Data.findByIdAndDelete({_id: id}).then(() => {
+                    console.log("data deleted");
+                })
+            }
         })
+
     } catch (error) {
         res.send({"ok": false});
     }
 };
 
-updateAllFilled = async ( id ) => {
-    let filled = true;
-    let _numberOfElements = Data.findOne({_id: id}).then(function(data){
-        return data.numberOfElements;
-    })
-    if(_numberOfElements != 9){
-        filled = false;
-    }
-    Data.findByIdAndUpdate({_id: id},{allFilled: filled}).then(() => {
-        res.send({"ok": true});
-    })
-}
 
-updateNumberOfElements = async ( dataRecived, id ) => {
-    let increaseDecreaceValues = 1;
-    if( !dataRecived ) {
-        increaseDecreaceValues = -1;
-    }
-    Data.findByIdAndUpdate({_id: id},{numberOfElements: numberOfElements + increaseDecreaceValues}).then(() => {
-        res.send({"ok": true});
-    });
-    updateAllFilled( id );
-};
+
 
 exports.UpdatevatMaterial = async(req, res) => {
     const {vatMaterial} = req.body;
     Data.findByIdAndUpdate({_id: req.params.id},{vatMaterial: vatMaterial}).then(() => {
         res.send({"ok": true});
     })
-    updateNumberOfElements( vatMaterial, req.params.id );
 } 
 
 exports.UpdatehourlyReport = async(req, res) => {
@@ -105,7 +101,7 @@ exports.UpdatehourlyReport = async(req, res) => {
     Data.findByIdAndUpdate({_id: req.params.id},{hourlyReport: hourlyReport}).then(() => {
         res.send({"ok": true});
     })
-    updateNumberOfElements( vatMaterial );
+    // updateNumberOfElements( vatMaterial );
 }
 
 exports.Updatevat = async(req, res) => {
@@ -113,7 +109,7 @@ exports.Updatevat = async(req, res) => {
     Data.findByIdAndUpdate({_id: req.params.id},{vat: vat}).then(() => {
         res.send({"ok": true});
     })
-    updateNumberOfElements( vatMaterial );
+    // updateNumberOfElements( vatMaterial );
 }
 
 exports.UpdatetaxAdvances = async(req, res) => {
@@ -121,7 +117,7 @@ exports.UpdatetaxAdvances = async(req, res) => {
     Data.findByIdAndUpdate({_id: req.params.id},{taxAdvances: taxAdvances}).then(() => {
         res.send({"ok": true});
     })
-    updateNumberOfElements( vatMaterial );
+    // updateNumberOfElements( vatMaterial );
 }
 
 exports.UpdatesocialSecurity = async(req, res) => {
@@ -129,7 +125,7 @@ exports.UpdatesocialSecurity = async(req, res) => {
     Data.findByIdAndUpdate({_id: req.params.id},{socialSecurity: socialSecurity}).then(() => {
         res.send({"ok": true});
     })
-    updateNumberOfElements( vatMaterial );
+    // updateNumberOfElements( vatMaterial );
 }
 
 exports.UpdateemployeeDeductions = async(req, res) => {
@@ -137,7 +133,7 @@ exports.UpdateemployeeDeductions = async(req, res) => {
     Data.findByIdAndUpdate({_id: req.params.id},{employeeDeductions: employeeDeductions}).then(() => {
         res.send({"ok": true});
     })
-    updateNumberOfElements( vatMaterial );
+    // updateNumberOfElements( vatMaterial );
 }
 
 exports.UpdateemployeesSocialSecurity = async(req, res) => {
@@ -145,7 +141,7 @@ exports.UpdateemployeesSocialSecurity = async(req, res) => {
     Data.findByIdAndUpdate({_id: req.params.id},{employeesSocialSecurity: employeesSocialSecurity}).then(() => {
         res.send({"ok": true});
     })
-    updateNumberOfElements( vatMaterial );
+    // updateNumberOfElements( vatMaterial );
 }
 
 exports.UpdatePaymentStatus = async(req, res) => {
@@ -153,7 +149,7 @@ exports.UpdatePaymentStatus = async(req, res) => {
     Data.findByIdAndUpdate({_id: req.params.id},{PaymentStatus: PaymentStatus}).then(() => {
         res.send({"ok": true});
     })
-    updateNumberOfElements( vatMaterial );
+    // updateNumberOfElements( vatMaterial );
 }
 
 exports.UpdateexpensesCollection = async(req, res) => {
@@ -161,6 +157,6 @@ exports.UpdateexpensesCollection = async(req, res) => {
     Data.findByIdAndUpdate({_id: req.params.id},{expensesCollection: expensesCollection}).then(() => {
         res.send({"ok": true});
     })
-    updateNumberOfElements( vatMaterial );
+    // updateNumberOfElements( vatMaterial );
 }
 

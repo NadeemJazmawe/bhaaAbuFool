@@ -14,9 +14,6 @@ const DataSchema = new Schema({
         type: String,
         required: true
     },
-    numberOfElements: {
-        type: Number,
-    },
     key:{
         type: String,
         required: true

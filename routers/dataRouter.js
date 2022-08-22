@@ -9,8 +9,12 @@ router
     .post(UserController.checkCookies, dataController.GetData)
 
 router
-    .route("/updatedata")
-    .post(UserController.checkCookies, dataController.UpdateData)
+    .route("/BuildData")
+    .post(UserController.checkCookies, dataController.BuildData)
+    
+router
+    .route("/deletedata")
+    .post(UserController.checkCookies, dataController.DeleteData)    
 
 router
     .route("/vatMaterial/:id")

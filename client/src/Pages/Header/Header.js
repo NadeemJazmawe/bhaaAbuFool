@@ -37,7 +37,7 @@ export default function Header() {
 
   return (
     <div className='header'>
-            <p className='logo'>Bhaa Abu fool</p>
+            <p className='logo'>Bahaa Abu fool</p>
             <div className='header-right'>
                 {!logged && <Link to='/'>
                     <p className={`${activeTab === "Home" ? "active" : ""}`} onClick={() => setActiveTab("Home")}>

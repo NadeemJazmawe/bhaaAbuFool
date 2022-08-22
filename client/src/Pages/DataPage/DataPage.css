@@ -60,3 +60,33 @@
     background-color: #9ed9db;
     color: black;
 }
+
+.data{
+    display: flex;
+    direction: rtl;
+
+}
+
+.filterTable {
+    margin: auto;
+    padding: 1em;
+}
+
+.check{
+    width: 50%;
+    padding: 12px 20px;
+    margin: 4px 2px;
+
+}
+
+.search{
+    position: relative;
+    margin: auto;
+    width: 350px;
+    direction: rtl;
+}
+
+input[type="button"] {
+    background-color: #917c46;
+    color: white;
+}

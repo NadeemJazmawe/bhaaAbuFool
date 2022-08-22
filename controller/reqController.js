@@ -59,7 +59,7 @@ exports.AddRequirement = async(req, res) => {
 
 exports.DeleteRequirement = async(req, res) => {
     // res.send({"ok": true});
-
+    console.log(req.params.id);
     Requirement.findByIdAndDelete({_id: req.params.id}).then(() => {
         res.send({"ok": true});
     })
