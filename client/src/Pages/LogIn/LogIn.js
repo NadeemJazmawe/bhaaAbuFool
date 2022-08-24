@@ -16,7 +16,7 @@ export default function LogIn() {
           if(data.ok){
             console.log({"LogIn": true});
             window.location.reload(true);
-            // window.location.replace("/clients");
+            window.location.replace("/clients");
           }else{
             console.log({"LogIn": false});
           }
